@@ -7,24 +7,24 @@ A **Dalamud plugin** for Final Fantasy XIV that lets you host trivia game nights
 ## Features
 
 - **50 FFXIV-themed trivia questions** covering ARR, Heavensward, Stormblood, Shadowbringers, Endwalker, and general knowledge
-- **Automatic chat integration** — Questions are sent via `/yell` or `/shout`, and player answers are detected automatically
-- **Case-insensitive answers** — Players can type in any capitalization
+- **Automatic chat integration**: Questions are sent via `/yell` or `/shout`, and player answers are detected automatically
+- **Case-insensitive answers**: Players can type in any capitalization
 - **60-second timer** per question (configurable)
 - **Live scoreboard** with gold/silver/bronze rankings
-- **Manual point adjustment** — Add or remove points if the system makes a mistake
-- **Question tracking** — Used questions are flagged and won't repeat
-- **Configurable win condition** — Set how many points are needed to win
-- **Game log** — Timestamped record of all game events
+- **Manual point adjustment**: Add or remove points if the system makes a mistake
+- **Question tracking**: Used questions are flagged and won't repeat
+- **Configurable win condition**: Set how many points are needed to win
+- **Game log**: Timestamped record of all game events
 
 ## How to Play
 
 1. The **host** opens the plugin with `/pcctn`
 2. Configure the **points to win** and **timer duration** in the Settings tab
-3. Click **Start Game** — an announcement is sent in chat
-4. Click **Send Next Question** — a trivia question is yelled in chat
+3. Click **Start Game**: an announcement is sent in chat
+4. Click **Send Next Question**: a trivia question is yelled in chat
 5. **Players answer** via `/yell` or `/shout` within 60 seconds
 6. The **first correct answer** earns 1 point
-7. Continue until someone reaches the target score — **they win!**
+7. Continue until someone reaches the target score, **they win!**
 
 ## Installation
 
@@ -58,18 +58,7 @@ All settings are accessible from the **Settings** tab in the main window:
 
 ## Adding Custom Questions
 
-Edit `QuestionBank.cs` and add new entries following this pattern:
-
-```csharp
-new TriviaQuestion
-{
-    Id = 51, // Use the next available ID
-    Category = "Your Category",
-    Question = "Your question here?",
-    Answers = new List<string> { "Answer1", "Alternate Answer" }
-},
-```
-
+WIP, I need to figure out HOW to make it so questions can be added and removed from inside the game >.<
 ## Credits
 
 Made with LOVE for the **Pink Chocobo Club**
@@ -78,6 +67,6 @@ Made with LOVE for the **Pink Chocobo Club**
 
 This project is licensed under the MIT License.
 
-##Side Notes
+## Side Notes
 
 Hello People! This is my first time doing a plugin, and I feel super proud of it!! Thanks for trying this out!
