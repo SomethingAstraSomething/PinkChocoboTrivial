@@ -1,0 +1,58 @@
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║  GitHub Actions - Build and Release workflow                     ║
+# ║  Automatically builds the plugin and creates a GitHub Release    ║
+# ║  with the .zip file that repo.json points to.                   ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+name: Build and Release
+
+# Trigger on version tags (e.g. v1.0.0)
+on:
+  push:
+    tags:
+      - 'v*'
+
+# Also allow manual triggering from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Step 2: Set up .NET SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # Step 3: Restore NuGet packages (including Dalamud SDK)
+      - name: Restore
+        run: dotnet restore PinkChocoboTrivial/PinkChocoboTrivial.csproj
+
+      # Step 4: Build the plugin in Release mode
+      - name: Build
+        run: dotnet build PinkChocoboTrivial/PinkChocoboTrivial.csproj --configuration Release --no-restore
+
+      # Step 5: Create the plugin zip (must contain DLL + JSON in a folder named after InternalName)
+      - name: Package
+        run: |
+          mkdir -p release/PinkChocoboTrivial
+          cp PinkChocoboTrivial/bin/Release/net8.0-windows/PinkChocoboTrivial.dll release/PinkChocoboTrivial/
+          cp PinkChocoboTrivial/bin/Release/net8.0-windows/PinkChocoboTrivial.json release/PinkChocoboTrivial/
+          cd release
+          7z a -tzip ../PinkChocoboTrivial.zip PinkChocoboTrivial/
+        shell: bash
+
+      # Step 6: Create a GitHub Release with the zip attached
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: PinkChocoboTrivial.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

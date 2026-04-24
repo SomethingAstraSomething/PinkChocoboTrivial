@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/goatcorp/Dalamud/master/Dalamud/Configuration/PluginManifest/pluginmaster.schema.json",
+  "Author": "Pink Chocobo Club",
+  "Name": "Pink Chocobo Club, Trivial Night!",
+  "Punchline": "Host FFXIV trivia nights with your community!",
+  "Description": "A trivia game plugin for FFXIV. The host shouts questions in chat and players answer via /yell or /shout. First correct answer wins the point! Perfect for FC events and community game nights.",
+  "Tags": [
+    "trivia",
+    "game",
+    "minigame",
+    "chat",
+    "social",
+    "quiz"
+  ],
+  "CategoryTags": [
+    "other"
+  ],
+  "InternalName": "PinkChocoboTrivial",
+  "AssemblyVersion": "1.0.0.0",
+  "RepoUrl": "https://github.com/SomethingAstraSomething/PinkChocoboTrivial",
+  "ApplicableVersion": "any",
+  "DalamudApiLevel": 14
+}
