@@ -141,7 +141,7 @@ public sealed class Plugin : IDalamudPlugin
     /// </summary>
     private void OnChatMessage(
         XivChatType type,
-        int senderId,
+        int timestamp,
         ref SeString sender,
         ref SeString message,
         ref bool isHandled)
