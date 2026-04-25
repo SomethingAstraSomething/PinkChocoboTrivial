@@ -125,7 +125,7 @@ public sealed class Plugin : IDalamudPlugin
     // Slash command handler
 
     /// <summary>
-    /// Called when the player types /pcctn in chat.
+    /// Called when the player types /pcctn in cha
     /// Toggles the main trivia control panel.
     /// </summary>
     private void OnCommand(string command, string args)
