@@ -192,7 +192,7 @@ public sealed class Plugin : IDalamudPlugin
     {
         try
         {
-            ChatGui.SendMessage(message);
+            CommandManager.ProcessCommand(message);
         }
         catch (Exception ex)
         {

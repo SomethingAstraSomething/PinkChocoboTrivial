@@ -22,6 +22,7 @@
     "DalamudApiLevel": 14,
     "IsHide": false,
     "IsTestingExclusive": false,
+    "DownloadCount": 0,
     "DownloadLinkInstall": "https://github.com/SomethingAstraSomething/PinkChocoboTrivial/releases/latest/download/PinkChocoboTrivial.zip",
     "DownloadLinkUpdate": "https://github.com/SomethingAstraSomething/PinkChocoboTrivial/releases/latest/download/PinkChocoboTrivial.zip",
     "DownloadLinkTesting": "https://github.com/SomethingAstraSomething/PinkChocoboTrivial/releases/latest/download/PinkChocoboTrivial.zip"
