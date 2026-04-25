@@ -34,7 +34,7 @@ A **Dalamud plugin** for Final Fantasy XIV that lets you host trivia game nights
 2. Go to the **Experimental** tab
 3. Under **Custom Plugin Repositories**, paste:
    ```
-   https://raw.githubusercontent.com/SomethingAstraSomething/PinkChocoboTrivial/main/repo.json
+   https://raw.githubusercontent.com/SomethingAstraSomething/PinkChocoboTrivial/master/repo.json
    ```
 4. Click the **+** button, then **Save and Close**
 5. Open the plugin installer
