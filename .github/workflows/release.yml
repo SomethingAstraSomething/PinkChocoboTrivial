@@ -46,14 +46,15 @@ jobs:
       - name: Build
         run: dotnet build PinkChocoboTrivial/PinkChocoboTrivial.csproj --configuration Release --no-restore
 
-      # Step 5: Create the plugin zip (must contain DLL + JSON in a folder named after InternalName)
+      # Step 5: Create the plugin zip (must contain DLL + JSON in a flat structure)
       - name: Package
         run: |
           mkdir -p release/PinkChocoboTrivial
           cp PinkChocoboTrivial/bin/Release/*/PinkChocoboTrivial.dll release/PinkChocoboTrivial/
           cp PinkChocoboTrivial/bin/Release/*/PinkChocoboTrivial.json release/PinkChocoboTrivial/
-          cd release
-          7z a -tzip ../PinkChocoboTrivial.zip PinkChocoboTrivial/
+          cp PinkChocoboTrivial/bin/Release/*/PinkChocoboTrivial.pdb release/PinkChocoboTrivial/ || true
+          cd release/PinkChocoboTrivial
+          7z a -tzip ../../PinkChocoboTrivial.zip *
         shell: bash
 
       # Step 6: Create a GitHub Release with the zip attached
