@@ -49,12 +49,12 @@ jobs:
       # Step 5: Create the plugin zip (must contain DLL + JSON in a flat structure)
       - name: Package
         run: |
-          mkdir -p release/PinkChocoboTrivial
-          cp PinkChocoboTrivial/bin/Release/*/PinkChocoboTrivial.dll release/PinkChocoboTrivial/
-          cp PinkChocoboTrivial/bin/Release/*/PinkChocoboTrivial.json release/PinkChocoboTrivial/
-          cp PinkChocoboTrivial/bin/Release/*/PinkChocoboTrivial.pdb release/PinkChocoboTrivial/ || true
-          cd release/PinkChocoboTrivial
-          7z a -tzip ../../PinkChocoboTrivial.zip *
+          mkdir -p releases_flat
+          find PinkChocoboTrivial -path "*/bin/Release/*" -name "PinkChocoboTrivial.dll" -exec cp {} releases_flat/ \;
+          find PinkChocoboTrivial -path "*/bin/Release/*" -name "PinkChocoboTrivial.json" -exec cp {} releases_flat/ \;
+          find PinkChocoboTrivial -path "*/bin/Release/*" -name "PinkChocoboTrivial.pdb" -exec cp {} releases_flat/ \;
+          cd releases_flat
+          7z a -tzip ../PinkChocoboTrivial.zip *
         shell: bash
 
       # Step 6: Create a GitHub Release with the zip attached
