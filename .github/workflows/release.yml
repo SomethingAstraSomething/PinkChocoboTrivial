@@ -28,7 +28,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: '10.0.x'
 
       # Step 3: Download Dalamud for SDK
       - name: Download Dalamud
@@ -49,10 +49,11 @@ jobs:
       # Step 5: Create the plugin zip (must contain DLL + JSON in a flat structure)
       - name: Package
         run: |
-          mkdir -p releases_flat
+          mkdir -p releases_flat/images
           find PinkChocoboTrivial -path "*/bin/Release/*" -name "PinkChocoboTrivial.dll" -exec cp {} releases_flat/ \;
           find PinkChocoboTrivial -path "*/bin/Release/*" -name "PinkChocoboTrivial.json" -exec cp {} releases_flat/ \;
           find PinkChocoboTrivial -path "*/bin/Release/*" -name "PinkChocoboTrivial.pdb" -exec cp {} releases_flat/ \;
+          if [ -d "images" ]; then cp -r images/* releases_flat/images/ 2>/dev/null || true; fi
           cd releases_flat
           7z a -tzip ../PinkChocoboTrivial.zip *
         shell: bash
