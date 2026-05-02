@@ -3,7 +3,7 @@
     "Author": "Astra",
     "Name": "Pink Chocobo Club, Trivial Night!",
     "InternalName": "PinkChocoboTrivial",
-    "AssemblyVersion": "1.0.0.7",
+    "AssemblyVersion": "1.0.0.8",
     "Description": "Host FFXIV-themed trivia nights with your Free Company or friends! The host shouts questions in chat and players answer via /yell or /shout. First correct answer wins the point! Features: configurable win conditions, 60-second timer, manual score adjustment, 50 FFXIV-themed questions, and question tracking to avoid repeats.",
     "Punchline": "A fun trivia game for your FFXIV community!",
     "RepoUrl": "https://github.com/SomethingAstraSomething/PinkChocoboTrivial",

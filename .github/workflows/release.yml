@@ -30,15 +30,23 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      # Step 3: Restore NuGet packages (including Dalamud SDK)
+      # Step 3: Download Dalamud for SDK
+      - name: Download Dalamud
+        run: |
+          $info = Invoke-RestMethod -Uri 'https://kamori.goats.dev/Dalamud/Release/VersionInfo'
+          Invoke-WebRequest -Uri $info.DownloadUrl -OutFile dalamud.zip
+          Expand-Archive -Force dalamud.zip "$env:AppData\XIVLauncher\addon\Hooks\dev\"
+        shell: powershell
+
+      # Step 4: Restore NuGet packages (including Dalamud SDK)
       - name: Restore
         run: dotnet restore PinkChocoboTrivial/PinkChocoboTrivial.csproj
 
-      # Step 4: Build the plugin in Release mode
+      # Step 5: Build the plugin in Release mode
       - name: Build
         run: dotnet build PinkChocoboTrivial/PinkChocoboTrivial.csproj --configuration Release --no-restore
 
-      # Step 5: Create the plugin zip (must contain DLL + JSON in a flat structure)
+      # Step 6: Create the plugin zip (must contain DLL + JSON in a flat structure)
       - name: Package
         run: |
           mkdir -p releases_flat/images
@@ -50,7 +58,7 @@ jobs:
           7z a -tzip ../PinkChocoboTrivial.zip *
         shell: bash
 
-      # Step 6: Create a GitHub Release with the zip attached
+      # Step 7: Create a GitHub Release with the zip attached
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
