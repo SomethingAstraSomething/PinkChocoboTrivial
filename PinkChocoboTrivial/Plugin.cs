@@ -31,8 +31,11 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>Provides access to the in-game chat log (read and send messages).</summary>
     [PluginService] internal static IChatGui ChatGui { get; private set; } = null!;
 
-    /// <summary>Provides information about the local player character.</summary>
+    /// <summary>Provides information about the client state.</summary>
     [PluginService] internal static IClientState ClientState { get; private set; } = null!;
+
+    /// <summary>Provides access to the game's object table.</summary>
+    [PluginService] internal static Dalamud.Plugin.Services.IObjectTable ObjectTable { get; private set; } = null!;
 
     /// <summary>Per-frame update hook used for timers and periodic logic.</summary>
     [PluginService] internal static IFramework Framework { get; private set; } = null!;
@@ -139,23 +142,18 @@ public sealed class Plugin : IDalamudPlugin
     /// Fired for every chat message the client receives.
     /// We filter for Yell and Shout messages and forward them to the game engine.
     /// </summary>
-    private void OnChatMessage(
-        XivChatType type,
-        int timestamp,
-        ref SeString sender,
-        ref SeString message,
-        ref bool isHandled)
+    private void OnChatMessage(Dalamud.Game.Chat.IHandleableChatMessage chatMessage)
     {
         // We only care about Yell (30) and Shout (11) messages
-        if (type != XivChatType.Yell && type != XivChatType.Shout)
+        if (chatMessage.LogKind != XivChatType.Yell && chatMessage.LogKind != XivChatType.Shout)
             return;
 
         // Extract the sender's name and message text
-        var senderName = sender.TextValue;
-        var messageText = message.TextValue;
+        var senderName = chatMessage.Sender.TextValue;
+        var messageText = chatMessage.Message.TextValue;
 
         // Ignore messages from the host (the player running the plugin)
-        var localPlayer = ClientState.LocalPlayer;
+        var localPlayer = ObjectTable.LocalPlayer;
         if (localPlayer != null)
         {
             var localName = localPlayer.Name.TextValue;
